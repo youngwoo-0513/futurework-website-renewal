@@ -8,7 +8,7 @@ const SUBSIDY_INFO = [
   },
   {
     title: '지원 금액',
-    content: '사업비의 최대 50% (최대 1억원)',
+    content: '사업비의 최대 50% 지원',
   },
   {
     title: '지원 내용',

@@ -1,8 +1,12 @@
-// 제품 페이지 — 탭 기반 기능 쇼케이스 (A+ AI 레퍼런스)
+// 제품 페이지 — AX Flow 핵심 기능과 세일즈덱 4~6p 기반 상세 섹션
 import type { Metadata } from 'next'
 import { SchemaMarkup } from '@/components/seo/SchemaMarkup'
 import { FloatingCTA } from '@/components/ui/FloatingCTA'
+import { ProductHeroSection } from '@/components/sections/ProductHeroSection'
 import { ProductShowcase } from '@/components/sections/ProductShowcase'
+import { WorkflowChangeSection } from '@/components/sections/WorkflowChangeSection'
+import { PlatformLayerSection } from '@/components/sections/PlatformLayerSection'
+import { TrustLayerSection } from '@/components/sections/TrustLayerSection'
 import { ProductTestimonials } from '@/components/sections/ProductTestimonials'
 import { Button } from '@/components/ui/Button'
 
@@ -24,39 +28,11 @@ export default function ProductPage() {
         ]}
       />
 
-      {/* 히어로 */}
-      <section className="relative overflow-hidden py-20 sm:py-28">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-accent/5 via-transparent to-transparent dark:from-accent/10" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-4 inline-flex rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-sm font-medium text-primary">
-              Manufacturing AI OS
-            </div>
-            <h1 className="text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl lg:text-5xl">
-              AX Flow
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-[var(--text-secondary)] sm:text-xl">
-              &ldquo;대답하는 AI&rdquo;가 아니라, 공장 안의 일을 실제로 끝내는 온톨로지 AI.<br className="hidden sm:block" />
-              기존 시스템을 바꾸지 않습니다. 위에 AI 운영 레이어 한층을 깝니다.
-            </p>
-
-            {/* CTA 2개 */}
-            <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
-              <Button href="/demo" size="lg">
-                데모 신청하기
-              </Button>
-              <Button href="/solutions/subsidy-guide" variant="secondary" size="lg">
-                도입비 50% 지원받고 PoC 하기
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 탭 기반 기능 쇼케이스 */}
+      <ProductHeroSection />
       <ProductShowcase />
-
-      {/* 고객 피드백 */}
+      <WorkflowChangeSection />
+      <PlatformLayerSection />
+      <TrustLayerSection />
       <ProductTestimonials />
 
       {/* 하단 CTA */}

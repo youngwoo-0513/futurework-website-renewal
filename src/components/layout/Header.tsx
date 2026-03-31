@@ -3,6 +3,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { NAV_ITEMS, NAV_CTA } from '@/lib/constants'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { MobileNav } from './MobileNav'
@@ -14,9 +15,15 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <span className="text-primary">FutureWork</span>
-          <span className="text-[var(--foreground)]">Lab</span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo-futureworklab.png"
+            alt="FutureWorkLab"
+            width={160}
+            height={28}
+            className="h-7 w-auto dark:brightness-0 dark:invert"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}

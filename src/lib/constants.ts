@@ -474,6 +474,6 @@ export const COMPANY_INFO = {
 
 // ─── Footer SNS ───
 export const SOCIAL_LINKS = [
-  { label: 'LinkedIn', href: '#' },
   { label: 'Blog', href: '/resources' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/futureworklab/' },
 ] as const

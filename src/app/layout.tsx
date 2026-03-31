@@ -1,6 +1,6 @@
 // Design Ref: §11.1 — RootLayout + ThemeProvider + 폰트
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Outfit } from 'next/font/google'
 import localFont from 'next/font/local'
 import { ThemeProvider } from 'next-themes'
 
@@ -22,10 +22,11 @@ const pretendard = localFont({
   fallback: ['system-ui', 'sans-serif'],
 })
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-outfit',
   display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
@@ -59,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${pretendard.variable} ${inter.variable}`}
+      className={`${pretendard.variable} ${outfit.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-screen flex flex-col antialiased">

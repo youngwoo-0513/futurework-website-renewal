@@ -1,5 +1,6 @@
 // Hero: 후킹 문구 + 50% 지원 + CTA (AX Flow 알아보기)
 import { Button } from '@/components/ui/Button'
+import { LogoBar } from '@/components/ui/LogoBar'
 import { HERO_COPY, HERO_STATS } from '@/lib/constants'
 
 export function HeroSection() {
@@ -55,6 +56,14 @@ export function HeroSection() {
             <Button href="/solutions/subsidy-guide" variant="secondary" size="lg">
               {HERO_COPY.secondaryCta}
             </Button>
+          </div>
+
+          {/* 신뢰 로고바 — Design §5.4: 파트너/고객사 로고 */}
+          <div className="mt-12">
+            <p className="mb-4 text-xs font-medium uppercase tracking-wider text-[var(--text-secondary)]">
+              신뢰하는 기업들이 선택했습니다
+            </p>
+            <LogoBar />
           </div>
         </div>
       </div>

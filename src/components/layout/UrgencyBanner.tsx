@@ -20,14 +20,14 @@ export function UrgencyBanner() {
   if (dismissed) return null
 
   return (
-    <div className="relative bg-gradient-to-r from-cta to-cta-dark text-white">
+    <div className="relative bg-gradient-to-r from-cta to-cta-dark text-[#09090B]">
       <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-4 py-2 text-sm sm:px-6">
         <span className="font-medium">
           {URGENCY_BANNER.text} D-{dDay}
         </span>
         <Link
           href={URGENCY_BANNER.ctaHref}
-          className="rounded-full bg-white/20 px-3 py-0.5 text-xs font-semibold transition-colors hover:bg-white/30"
+          className="rounded-full bg-[#09090B]/15 px-3 py-0.5 text-xs font-semibold transition-colors hover:bg-[#09090B]/25"
         >
           {URGENCY_BANNER.ctaText}
         </Link>

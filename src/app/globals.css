@@ -1,39 +1,56 @@
 @import "tailwindcss";
 
-/* Design Ref: §12.2 — 듀얼 테마 컬러 팔레트 (Tailwind CSS 변수) */
+/* Branding: AX Flow Brand Guide v3 — Color/Font tokens */
 @theme inline {
-  --font-sans: var(--font-pretendard), var(--font-inter), system-ui, sans-serif;
+  --font-sans: var(--font-pretendard), var(--font-outfit), system-ui, sans-serif;
+  --font-heading: var(--font-outfit), var(--font-pretendard), system-ui, sans-serif;
 
-  --color-primary: #3B82F6;
-  --color-primary-dark: #2563EB;
-  --color-accent: #8B5CF6;
-  --color-accent-dark: #7C3AED;
-  --color-cta: #F97316;
-  --color-cta-dark: #EA580C;
-  --color-success: #10B981;
+  /* Primary Neon Green — CTA, links, interactive (Brand Guide v3 accent → point color) */
+  --color-primary: #00B85E;
+  --color-primary-dark: #009A4E;
+  /* Accent Neon Green — highlights, energy */
+  --color-accent: #00FF85;
+  --color-accent-dark: #00B85E;
+  /* CTA = Neon Green */
+  --color-cta: #00FF85;
+  --color-cta-dark: #00B85E;
+  /* Sub Violet */
+  --color-violet: #8B5CF6;
+  --color-violet-dark: #7C3AED;
+  /* Semantic */
+  --color-success: #22C55E;
   --color-success-dark: #059669;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
 }
 
+/* Light mode — Zinc neutral scale */
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --surface: #f8fafc;
-  --text-secondary: #64748b;
-  --border: #e2e8f0;
+  --background: #FFFFFF;
+  --foreground: #09090B;
+  --surface: #F4F4F5;
+  --text-secondary: #52525B;
+  --border: #E4E4E7;
 }
 
+/* Dark mode — Zinc neutral scale */
 .dark {
-  --background: #0f172a;
-  --foreground: #f8fafc;
-  --surface: #1e293b;
-  --text-secondary: #94a3b8;
-  --border: #334155;
+  --background: #09090B;
+  --foreground: #FAFAFA;
+  --surface: #18181B;
+  --text-secondary: #A1A1AA;
+  --border: #27272A;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+}
+
+/* Heading font */
+h1, h2, h3 {
+  font-family: var(--font-heading);
 }
 
 /* 스크롤 동작 */

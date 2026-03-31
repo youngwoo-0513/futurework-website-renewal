@@ -1,5 +1,6 @@
 // Design Ref: §5.3 — 회사 정보, 연락처, SNS, 개인정보처리방침
 import Link from 'next/link'
+import Image from 'next/image'
 import { COMPANY_INFO, NAV_ITEMS, SOCIAL_LINKS } from '@/lib/constants'
 
 export function Footer() {
@@ -9,9 +10,14 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* 회사 정보 */}
           <div>
-            <Link href="/" className="font-bold text-lg">
-              <span className="text-primary">FutureWork</span>
-              <span className="text-[var(--foreground)]">Lab</span>
+            <Link href="/">
+              <Image
+                src="/logo-futureworklab.png"
+                alt="FutureWorkLab"
+                width={140}
+                height={24}
+                className="h-6 w-auto dark:brightness-0 dark:invert"
+              />
             </Link>
             <p className="mt-3 text-sm text-[var(--text-secondary)]">
               제조업 AI 도입의 새로운 기준.

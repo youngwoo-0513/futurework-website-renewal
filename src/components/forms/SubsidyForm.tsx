@@ -55,6 +55,14 @@ export function SubsidyForm({ onSuccess }: SubsidyFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+      {/* Honeypot 스팸 방지 */}
+      <input
+        type="text"
+        name="website"
+        className="absolute -left-[9999px] opacity-0"
+        tabIndex={-1}
+        autoComplete="off"
+      />
       <Input
         label="이메일"
         type="email"
