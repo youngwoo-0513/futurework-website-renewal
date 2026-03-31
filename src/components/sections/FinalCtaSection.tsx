@@ -1,5 +1,4 @@
-// Design Ref: §5.4 — FinalCTA: 2-Step 리드 폼 + 긴급성 카피 + 신뢰 배지
-// Plan SC: 리드 폼 전환율 5% 이상
+// FinalCTA: 수정6 — "1일 이내 담당자 매칭"
 import { LeadForm } from '@/components/forms/LeadForm'
 import { FINAL_CTA_COPY } from '@/lib/constants'
 
@@ -9,8 +8,16 @@ export function FinalCtaSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-md">
           <h2 className="text-center text-2xl font-bold text-[var(--foreground)] sm:text-3xl">
-            {FINAL_CTA_COPY.headline}
+            {FINAL_CTA_COPY.headline.split('\n').map((line, i) => (
+              <span key={i}>
+                {i > 0 && <br />}
+                {line}
+              </span>
+            ))}
           </h2>
+          <p className="mt-3 text-center text-[var(--text-secondary)]">
+            {FINAL_CTA_COPY.subheadline}
+          </p>
           <div className="mt-8">
             <LeadForm />
           </div>

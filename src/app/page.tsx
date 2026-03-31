@@ -1,8 +1,11 @@
-// Design Ref: §5.2 — Homepage 섹션 구성 (CRO 최적화 플로우)
-// Plan SC: 페이지 이탈률 60% 이하 — Progressive Disclosure 4단계
+// 홈페이지 — 리뉴얼 v2 (유저 저니 최적화)
 import { HeroSection } from '@/components/sections/HeroSection'
+import { TractionSection } from '@/components/sections/TractionSection'
 import { ProblemSection } from '@/components/sections/ProblemSection'
 import { SolutionSection } from '@/components/sections/SolutionSection'
+import { CoreFeatureSection } from '@/components/sections/CoreFeatureSection'
+import { ComparisonSection } from '@/components/sections/ComparisonSection'
+import { IntegrationHubSection } from '@/components/sections/IntegrationHubSection'
 import { SocialProofSection } from '@/components/sections/SocialProofSection'
 import { FaqSection } from '@/components/sections/FaqSection'
 import { FinalCtaSection } from '@/components/sections/FinalCtaSection'
@@ -17,8 +20,12 @@ export default function HomePage() {
       <SchemaMarkup type="faq" />
 
       <HeroSection />
+      <TractionSection />
       <ProblemSection />
+      <CoreFeatureSection />
       <SolutionSection />
+      <ComparisonSection />
+      <IntegrationHubSection />
       <SocialProofSection />
       <FaqSection />
       <FinalCtaSection />
