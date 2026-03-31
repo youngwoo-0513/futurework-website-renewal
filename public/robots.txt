@@ -1,0 +1,18 @@
+# Design Ref: §10.4 — AI 크롤러 허용
+User-agent: *
+Allow: /
+
+# AI Crawlers - 명시적 허용
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://futureworklab.co.kr/sitemap.xml
