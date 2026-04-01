@@ -1,10 +1,10 @@
-// Design Ref: §5.3 — 상태 배지 (긴급, 신규 등)
+// Badge — Refined with subtle border treatment
 type BadgeVariant = 'default' | 'urgent' | 'success'
 
 const variantStyles: Record<BadgeVariant, string> = {
-  default: 'bg-primary/10 text-primary',
-  urgent: 'bg-cta/10 text-cta',
-  success: 'bg-success/10 text-success',
+  default: 'bg-primary/8 text-primary border-primary/20',
+  urgent: 'bg-cta/8 text-cta border-cta/20',
+  success: 'bg-success/8 text-success border-success/20',
 }
 
 interface BadgeProps {
@@ -15,7 +15,7 @@ interface BadgeProps {
 export function Badge({ children, variant = 'default' }: BadgeProps) {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${variantStyles[variant]}`}
+      className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold tracking-wide uppercase ${variantStyles[variant]}`}
     >
       {children}
     </span>

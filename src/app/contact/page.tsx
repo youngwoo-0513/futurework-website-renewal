@@ -5,11 +5,12 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/components/ui/Input'
+import { Select } from '@/components/ui/Select'
 import { Button } from '@/components/ui/Button'
 import { SchemaMarkup } from '@/components/seo/SchemaMarkup'
 import { contactFormSchema } from '@/lib/schemas'
 import { submitContactForm } from '@/lib/form-action'
-import { COMPANY_INFO } from '@/lib/constants'
+import { COMPANY_INFO, INDUSTRY_OPTIONS } from '@/lib/constants'
 import type { ContactFormData } from '@/types'
 
 export default function ContactPage() {
@@ -103,6 +104,13 @@ export default function ContactPage() {
                   <Input label="이름" error={errors.name?.message} {...register('name')} />
                   <Input label="이메일" type="email" error={errors.email?.message} {...register('email')} />
                   <Input label="회사명" error={errors.company?.message} {...register('company')} />
+                  <Select
+                    label="업종"
+                    options={INDUSTRY_OPTIONS}
+                    placeholder="선택해주세요"
+                    error={errors.industry?.message}
+                    {...register('industry')}
+                  />
                   <div className="space-y-1">
                     <label htmlFor="message" className="block text-sm font-medium text-[var(--foreground)]">
                       문의 내용

@@ -1,4 +1,4 @@
-// Design Ref: §5.3 — 네비게이션, 로고, CTA 버튼, 모바일 햄버거
+// Header — Refined with animated nav underlines and glass backdrop
 'use client'
 
 import { useState } from 'react'
@@ -12,7 +12,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-[var(--border)]/50 bg-[var(--background)]/70 backdrop-blur-xl backdrop-saturate-150">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center">
@@ -27,12 +27,12 @@ export function Header() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-1">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--foreground)]"
+              className="relative px-3 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--foreground)] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-primary after:transition-all after:duration-200 hover:after:w-4/5"
             >
               {item.label}
             </Link>
@@ -44,7 +44,7 @@ export function Header() {
           <ThemeToggle />
           <Link
             href={NAV_CTA.href}
-            className="rounded-lg bg-cta px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-cta-dark"
+            className="rounded-lg bg-cta px-4 py-2 text-sm font-semibold text-[#09090B] shadow-[0_1px_2px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.15)] transition-all duration-200 hover:brightness-110 hover:shadow-[0_4px_16px_rgba(0,255,133,0.25)] active:scale-[0.98]"
           >
             {NAV_CTA.label}
           </Link>

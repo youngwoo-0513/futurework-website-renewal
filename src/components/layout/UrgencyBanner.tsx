@@ -1,11 +1,10 @@
-// Design Ref: §5.4 — 상단 고정 긴급성 배너 (마감 D-day, 닫기 가능)
+// UrgencyBanner — Refined with monochrome treatment
 'use client'
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { URGENCY_BANNER } from '@/lib/constants'
 
-// 지원사업 마감일 (상수에서 관리 가능)
 const SUBSIDY_DEADLINE = new Date('2026-06-30')
 
 export function UrgencyBanner() {
@@ -20,20 +19,21 @@ export function UrgencyBanner() {
   if (dismissed) return null
 
   return (
-    <div className="relative bg-gradient-to-r from-cta to-cta-dark text-[#09090B]">
-      <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-4 py-2 text-sm sm:px-6">
-        <span className="font-medium">
+    <div className="relative bg-[var(--foreground)] text-[var(--background)]">
+      <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-4 py-2.5 text-sm sm:px-6">
+        <span className="flex h-1.5 w-1.5 rounded-full bg-cta animate-pulse" />
+        <span className="font-medium tracking-tight">
           {URGENCY_BANNER.text} D-{dDay}
         </span>
         <Link
           href={URGENCY_BANNER.ctaHref}
-          className="rounded-full bg-[#09090B]/15 px-3 py-0.5 text-xs font-semibold transition-colors hover:bg-[#09090B]/25"
+          className="rounded-full bg-[var(--background)]/15 px-3 py-0.5 text-xs font-semibold transition-colors hover:bg-[var(--background)]/25"
         >
           {URGENCY_BANNER.ctaText}
         </Link>
         <button
           onClick={() => setDismissed(true)}
-          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 transition-opacity hover:opacity-70 sm:right-4"
+          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 opacity-50 transition-opacity hover:opacity-100 sm:right-4"
           aria-label="배너 닫기"
         >
           <svg

@@ -1,4 +1,5 @@
-// 세일즈덱 6p — AX Guard Trust Layer: 안전·설명 가능성·통제
+// AX Guard Trust Layer — Refined with monochrome cards
+import { AnimateIn, StaggerChildren } from '@/components/ui/AnimateIn'
 
 const TRUST_PILLARS = [
   {
@@ -24,26 +25,33 @@ const REGULATIONS = [
 
 export function TrustLayerSection() {
   return (
-    <section className="py-16 sm:py-24">
+    <section className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-2xl font-bold text-[var(--foreground)] sm:text-3xl">
-            AX Guard — Trust Layer
-          </h2>
-          <p className="mt-3 text-lg text-[var(--text-secondary)]">
-            AI가 한 모든 일에 근거와 이력이 남습니다
-          </p>
-        </div>
+        <AnimateIn>
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
+              Trust & Governance
+            </p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl">
+              AX Guard — Trust Layer
+            </h2>
+            <p className="mt-4 text-lg text-[var(--text-secondary)]">
+              AI가 한 모든 일에 근거와 이력이 남습니다
+            </p>
+          </div>
+        </AnimateIn>
 
         {/* Trust 3축 */}
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
+        <StaggerChildren className="mt-14 grid gap-5 sm:grid-cols-3" stagger={0.1}>
           {TRUST_PILLARS.map((pillar) => (
             <div
               key={pillar.title}
-              className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 text-center"
+              className="group rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 text-center transition-all duration-300 hover:border-primary/30 hover:shadow-[0_8px_30px_-12px_rgba(0,184,94,0.12)]"
             >
-              <span className="text-3xl">{pillar.icon}</span>
-              <h3 className="mt-3 text-lg font-bold text-[var(--foreground)]">
+              <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--foreground)]/5 text-3xl transition-transform duration-300 group-hover:scale-110">
+                {pillar.icon}
+              </span>
+              <h3 className="mt-4 text-lg font-bold tracking-tight text-[var(--foreground)]">
                 {pillar.title}
               </h3>
               <p className="mt-2 text-sm text-[var(--text-secondary)]">
@@ -51,34 +59,38 @@ export function TrustLayerSection() {
               </p>
             </div>
           ))}
-        </div>
+        </StaggerChildren>
 
         {/* 규제 대응 뱃지 */}
-        <div className="mt-10 text-center">
-          <p className="text-sm font-semibold text-[var(--text-secondary)]">
-            규제·인증 대응 내장
-          </p>
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
-            {REGULATIONS.map((reg) => (
-              <span
-                key={reg}
-                className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-1.5 text-sm font-medium text-[var(--foreground)]"
-              >
-                {reg}
-              </span>
-            ))}
+        <AnimateIn delay={0.3}>
+          <div className="mt-12 text-center">
+            <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--text-tertiary)]">
+              규제·인증 대응 내장
+            </p>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+              {REGULATIONS.map((reg) => (
+                <span
+                  key={reg}
+                  className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm font-semibold text-[var(--foreground)]"
+                >
+                  {reg}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
+        </AnimateIn>
 
         {/* 하단 메시지 */}
-        <div className="mx-auto mt-12 max-w-2xl text-center">
-          <p className="text-lg font-bold text-[var(--foreground)]">
-            개인의 두 번째 뇌가 아닌, 조직의 두 번째 뇌.
-          </p>
-          <p className="mt-2 text-[var(--text-secondary)]">
-            지식을 연결하고, 에이전트가 실행하고, AX Guard가 신뢰를 보장합니다.
-          </p>
-        </div>
+        <AnimateIn delay={0.4}>
+          <div className="mx-auto mt-14 max-w-2xl text-center">
+            <p className="text-xl font-bold tracking-tight text-[var(--foreground)]">
+              개인의 두 번째 뇌가 아닌, 조직의 두 번째 뇌.
+            </p>
+            <p className="mt-3 text-[var(--text-secondary)]">
+              지식을 연결하고, 에이전트가 실행하고, AX Guard가 신뢰를 보장합니다.
+            </p>
+          </div>
+        </AnimateIn>
       </div>
     </section>
   )

@@ -1,10 +1,9 @@
-// Design Ref: §5.3 — 파트너/고객사 로고 가로 스크롤
+// LogoBar — Refined placeholder with monochrome treatment
 interface LogoBarProps {
   logos?: string[]
 }
 
 export function LogoBar({ logos }: LogoBarProps) {
-  // 로고 이미지 없을 때 플레이스홀더 표시
   const placeholders = logos ?? [
     'Partner A',
     'Partner B',
@@ -14,11 +13,11 @@ export function LogoBar({ logos }: LogoBarProps) {
   ]
 
   return (
-    <div className="flex items-center justify-center gap-8 opacity-50 grayscale">
+    <div className="flex items-center justify-center gap-10 opacity-40">
       {placeholders.map((name, i) => (
         <div
           key={i}
-          className="flex h-8 items-center text-xs font-medium text-[var(--text-secondary)]"
+          className="flex h-8 items-center text-xs font-semibold uppercase tracking-widest text-[var(--text-tertiary)]"
         >
           {name}
         </div>

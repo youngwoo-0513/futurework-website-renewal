@@ -1,8 +1,9 @@
-// 제품 기능 쇼케이스 — 좌측 사이드바 네비게이션 + 우측 스크롤 콘텐츠 카드 (A+ AI 레퍼런스)
+// 제품 기능 쇼케이스 — Refined sidebar nav + content cards
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { Button } from '@/components/ui/Button'
+import { AnimateIn } from '@/components/ui/AnimateIn'
 import { CORE_FEATURES } from '@/lib/constants'
 
 export function ProductShowcase() {
@@ -11,7 +12,6 @@ export function ProductShowcase() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isClickScroll = useRef(false)
 
-  // Intersection Observer — 스크롤 시 사이드바 하이라이트 동기화
   useEffect(() => {
     const observers: IntersectionObserver[] = []
 
@@ -49,27 +49,32 @@ export function ProductShowcase() {
   }, [])
 
   return (
-    <section className="py-16 sm:py-24">
+    <section className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-2xl font-bold text-[var(--foreground)] sm:text-3xl">
-            AX Flow 제품구조 및 기능
-          </h2>
-          <p className="mt-3 text-[var(--text-secondary)]">
-            Chatting · Library · Agent · Governance — 4대 핵심 기능
-          </p>
-        </div>
+        <AnimateIn>
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
+              Platform Features
+            </p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl">
+              AX Flow 제품구조 및 기능
+            </h2>
+            <p className="mt-4 text-lg text-[var(--text-secondary)]">
+              Chatting · Library · Agent · Governance — 4대 핵심 기능
+            </p>
+          </div>
+        </AnimateIn>
 
         {/* 모바일: 가로 스크롤 탭 */}
-        <div className="mt-8 overflow-x-auto lg:hidden">
+        <div className="mt-10 overflow-x-auto lg:hidden">
           <div className="flex gap-2 px-1 pb-2">
             {CORE_FEATURES.map((f) => (
               <button
                 key={f.id}
                 onClick={() => scrollTo(f.id)}
-                className={`shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                className={`shrink-0 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
                   activeId === f.id
-                    ? 'bg-primary text-white shadow-md shadow-primary/30'
+                    ? 'bg-[var(--foreground)] text-[var(--background)] shadow-md'
                     : 'border border-[var(--border)] bg-[var(--surface)] text-[var(--text-secondary)]'
                 }`}
               >
@@ -85,8 +90,8 @@ export function ProductShowcase() {
           {/* 좌측 사이드바 (데스크탑) */}
           <div className="hidden lg:block lg:w-[220px] lg:shrink-0">
             <div className="sticky top-24">
-              <nav className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm">
-                <p className="mb-4 px-2 text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]">
+              <nav className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4">
+                <p className="mb-4 px-2 text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--text-tertiary)]">
                   Platform Layer
                 </p>
                 <div className="space-y-1">
@@ -94,16 +99,18 @@ export function ProductShowcase() {
                     <button
                       key={f.id}
                       onClick={() => scrollTo(f.id)}
-                      className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition-all ${
+                      className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition-all duration-200 ${
                         activeId === f.id
-                          ? 'bg-primary/10 text-primary shadow-sm'
+                          ? 'bg-[var(--foreground)] text-[var(--background)] shadow-sm'
                           : 'text-[var(--text-secondary)] hover:bg-[var(--background)] hover:text-[var(--foreground)]'
                       }`}
                     >
                       <span className="text-lg">{f.icon}</span>
                       <div>
                         <div>{f.title}</div>
-                        <div className="text-[10px] font-normal text-[var(--text-secondary)]">
+                        <div className={`text-[10px] font-normal ${
+                          activeId === f.id ? 'text-[var(--background)]/60' : 'text-[var(--text-tertiary)]'
+                        }`}>
                           {f.subtitle}
                         </div>
                       </div>
@@ -124,56 +131,56 @@ export function ProductShowcase() {
                 className="scroll-mt-24"
               >
                 <div
-                  className={`overflow-hidden rounded-2xl border bg-[var(--surface)] shadow-sm transition-shadow hover:shadow-lg ${
+                  className={`overflow-hidden rounded-2xl border bg-[var(--surface)] transition-all duration-300 hover:shadow-lg ${
                     activeId === feature.id
-                      ? 'border-primary/30'
+                      ? 'border-primary/30 shadow-[0_4px_20px_-8px_rgba(0,184,94,0.1)]'
                       : 'border-[var(--border)]'
                   }`}
                 >
-                  {/* 비주얼 영역 — 제품 스크린샷 placeholder */}
-                  <div className="relative aspect-[2/1] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-                    <div className="text-center px-8">
+                  {/* 비주얼 영역 */}
+                  <div className="relative aspect-[2/1] bg-[var(--foreground)] flex items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 bg-grid opacity-[0.04]" />
+                    <div className="relative text-center px-8">
                       <div className="text-5xl mb-3">{feature.icon}</div>
-                      <h3 className="text-2xl font-bold text-white sm:text-3xl">
+                      <h3 className="text-2xl font-bold text-[var(--background)] sm:text-3xl">
                         {feature.title}
                       </h3>
-                      <p className="mt-1 text-sm text-slate-400">{feature.subtitle}</p>
-                      <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur">
-                        <span className="text-lg font-bold text-white">
+                      <p className="mt-1 text-sm text-[var(--background)]/50">{feature.subtitle}</p>
+                      <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--background)]/10 bg-[var(--background)]/5 px-4 py-2 backdrop-blur">
+                        <span className="text-lg font-bold text-gradient-green">
                           {feature.metric}
                         </span>
-                        <span className="text-xs text-slate-300">
+                        <span className="text-xs text-[var(--background)]/50">
                           {feature.metricDetail}
                         </span>
                       </div>
                     </div>
-                    <div className="absolute bottom-3 right-3 rounded-lg bg-black/50 px-3 py-1 text-xs text-white/60 backdrop-blur">
+                    <div className="absolute bottom-3 right-3 rounded-md bg-[var(--background)]/5 px-3 py-1 text-xs text-[var(--background)]/40 backdrop-blur">
                       제품 스크린샷 준비 중
                     </div>
                   </div>
 
                   {/* 설명 영역 */}
                   <div className="p-6 sm:p-8">
-                    {/* 1줄 핵심 헤드라인 */}
-                    <h3 className="text-xl font-bold text-[var(--foreground)]">
+                    <h3 className="text-xl font-bold tracking-tight text-[var(--foreground)]">
                       {feature.headline}
                     </h3>
                     <p className="mt-3 leading-relaxed text-[var(--text-secondary)]">
                       {feature.description}
                     </p>
 
-                    {/* 업종별 활용 사례 — 2열 카드 그리드 */}
+                    {/* 업종별 활용 사례 */}
                     <div className="mt-8">
-                      <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-primary">
                         업종별 활용 사례
                       </h4>
                       <div className="mt-4 grid gap-3 sm:grid-cols-2">
                         {feature.useCases.map((uc, i) => (
                           <div
                             key={uc.industry}
-                            className="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[var(--background)] p-4 transition-shadow hover:shadow-md"
+                            className="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-[var(--background)] p-4 transition-all duration-200 hover:border-primary/20 hover:shadow-md"
                           >
-                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-xs font-bold text-primary">
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--foreground)] text-xs font-bold text-[var(--background)]">
                               {i + 1}
                             </div>
                             <div>
@@ -194,14 +201,16 @@ export function ProductShowcase() {
             ))}
 
             {/* 데모 CTA */}
-            <div className="text-center pt-4">
-              <Button href="/demo" size="lg">
-                데모 체험해보기 →
-              </Button>
-              <p className="mt-3 text-sm text-[var(--text-secondary)]">
-                15분이면 귀사에 가장 적합한 워크플로우 1개를 제안드립니다.
-              </p>
-            </div>
+            <AnimateIn>
+              <div className="text-center pt-4">
+                <Button href="/demo" size="lg">
+                  데모 체험해보기 →
+                </Button>
+                <p className="mt-3 text-sm text-[var(--text-secondary)]">
+                  15분이면 귀사에 가장 적합한 워크플로우 1개를 제안드립니다.
+                </p>
+              </div>
+            </AnimateIn>
           </div>
         </div>
       </div>

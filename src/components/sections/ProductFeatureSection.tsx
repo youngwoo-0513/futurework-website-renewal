@@ -1,5 +1,6 @@
-// Design Ref: §5.4 — 기능 상세 (온톨로지/RAG/워크플로우) + 비교 테이블
+// Product Features — Refined with section labels
 import { Card } from '@/components/ui/Card'
+import { AnimateIn, StaggerChildren } from '@/components/ui/AnimateIn'
 
 const FEATURES = [
   {
@@ -32,57 +33,78 @@ const COMPARISON = [
 
 export function ProductFeatureSection() {
   return (
-    <section className="py-16 sm:py-24">
+    <section className="py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* 핵심 기능 3개 */}
-        <h2 className="text-center text-2xl font-bold text-[var(--foreground)] sm:text-3xl">
-          핵심 기능
-        </h2>
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
+        <AnimateIn>
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
+            Core Technology
+          </p>
+          <h2 className="mt-3 text-center text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl">
+            핵심 기능
+          </h2>
+        </AnimateIn>
+        <StaggerChildren className="mt-14 grid gap-5 sm:grid-cols-3" stagger={0.1}>
           {FEATURES.map((f) => (
             <Card key={f.title} icon={f.icon} title={f.title} description={f.description} />
           ))}
-        </div>
+        </StaggerChildren>
 
         {/* 비교 테이블 */}
-        <h2 className="mt-20 text-center text-2xl font-bold text-[var(--foreground)] sm:text-3xl">
-          AX Flow vs 일반 AI 솔루션
-        </h2>
-        <div className="mt-8 overflow-x-auto">
-          <table className="mx-auto w-full max-w-2xl">
-            <thead>
-              <tr className="border-b border-[var(--border)]">
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[var(--foreground)]">비교 항목</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-primary">AX Flow</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[var(--text-secondary)]">일반 솔루션</th>
-              </tr>
-            </thead>
-            <tbody>
-              {COMPARISON.map((row) => (
-                <tr key={row.category} className="border-b border-[var(--border)] last:border-0">
-                  <td className="px-4 py-3 text-sm font-medium text-[var(--foreground)]">{row.category}</td>
-                  <td className="px-4 py-3 text-sm text-primary">{row.axflow}</td>
-                  <td className="px-4 py-3 text-sm text-[var(--text-secondary)]">{row.others}</td>
+        <AnimateIn delay={0.2}>
+          <div className="mt-20">
+            <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-tertiary)]">
+              Comparison
+            </p>
+            <h2 className="mt-3 text-center text-3xl font-bold tracking-tight text-[var(--foreground)] sm:text-4xl">
+              AX Flow vs 일반 AI 솔루션
+            </h2>
+          </div>
+        </AnimateIn>
+        <AnimateIn delay={0.3}>
+          <div className="mt-10 overflow-x-auto">
+            <table className="mx-auto w-full max-w-2xl">
+              <thead>
+                <tr className="border-b-2 border-[var(--foreground)]/10">
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[var(--text-tertiary)]">비교 항목</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-primary">AX Flow</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-[var(--text-tertiary)]">일반 솔루션</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {COMPARISON.map((row, i) => (
+                  <tr
+                    key={row.category}
+                    className={`border-b border-[var(--border)] last:border-0 transition-colors hover:bg-primary/3 ${
+                      i % 2 === 0 ? 'bg-[var(--surface)]/50' : ''
+                    }`}
+                  >
+                    <td className="px-4 py-3 text-sm font-medium text-[var(--foreground)]">{row.category}</td>
+                    <td className="px-4 py-3 text-sm font-medium text-primary">{row.axflow}</td>
+                    <td className="px-4 py-3 text-sm text-[var(--text-secondary)]">{row.others}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </AnimateIn>
 
         {/* 연동 시스템 */}
-        <div className="mt-16 text-center">
-          <h3 className="text-lg font-semibold text-[var(--foreground)]">연동 가능 시스템</h3>
-          <div className="mt-4 flex flex-wrap justify-center gap-3">
-            {['ERP', 'MES', 'Excel', 'PDF', '수기문서', '암묵지', 'WMS', 'QMS'].map((sys) => (
-              <span
-                key={sys}
-                className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-4 py-1.5 text-sm text-[var(--text-secondary)]"
-              >
-                {sys}
-              </span>
-            ))}
+        <AnimateIn delay={0.4}>
+          <div className="mt-16 text-center">
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.15em] text-[var(--text-tertiary)]">연동 가능 시스템</h3>
+            <div className="mt-4 flex flex-wrap justify-center gap-2.5">
+              {['ERP', 'MES', 'Excel', 'PDF', '수기문서', '암묵지', 'WMS', 'QMS'].map((sys) => (
+                <span
+                  key={sys}
+                  className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--foreground)]"
+                >
+                  {sys}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
+        </AnimateIn>
       </div>
     </section>
   )

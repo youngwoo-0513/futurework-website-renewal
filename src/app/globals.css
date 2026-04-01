@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Branding: AX Flow Brand Guide v3 — Color/Font tokens */
+/* ═══ AX Flow Brand — Industrial Precision Design System ═══ */
 @theme inline {
   --font-sans: var(--font-pretendard), var(--font-outfit), system-ui, sans-serif;
   --font-heading: var(--font-outfit), var(--font-pretendard), system-ui, sans-serif;
@@ -24,42 +24,130 @@
   --color-error: #EF4444;
 }
 
-/* Light mode — Zinc neutral scale */
+/* ═══ Light mode — Zinc neutral scale ═══ */
 :root {
   --background: #FFFFFF;
   --foreground: #09090B;
   --surface: #F4F4F5;
+  --surface-elevated: #FFFFFF;
   --text-secondary: #52525B;
+  --text-tertiary: #A1A1AA;
   --border: #E4E4E7;
+  --border-subtle: #F4F4F5;
+  --glow-color: rgba(0, 255, 133, 0.08);
+  --noise-opacity: 0.03;
+  --grid-color: rgba(0, 0, 0, 0.04);
+  --section-alt: #FAFAFA;
 }
 
-/* Dark mode — Zinc neutral scale */
+/* ═══ Dark mode — Zinc neutral scale ═══ */
 .dark {
   --background: #09090B;
   --foreground: #FAFAFA;
   --surface: #18181B;
+  --surface-elevated: #27272A;
   --text-secondary: #A1A1AA;
+  --text-tertiary: #71717A;
   --border: #27272A;
+  --border-subtle: #18181B;
+  --glow-color: rgba(0, 255, 133, 0.06);
+  --noise-opacity: 0.02;
+  --grid-color: rgba(255, 255, 255, 0.03);
+  --section-alt: #0F0F11;
 }
 
+/* ═══ Base ═══ */
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
 }
 
-/* Heading font */
 h1, h2, h3 {
   font-family: var(--font-heading);
 }
 
-/* 스크롤 동작 */
 html {
   scroll-behavior: smooth;
 }
 
-/* 포커스 스타일 */
+/* ═══ Focus ring — brand green ═══ */
 *:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+}
+
+/* ═══ Dot-Grid Background Texture ═══ */
+.bg-grid {
+  background-image: radial-gradient(circle, var(--grid-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ═══ Noise overlay — adds film grain depth ═══ */
+.noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: var(--noise-opacity);
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ═══ Section divider — elegant hairline ═══ */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent
+  );
+}
+
+/* ═══ Glass card ═══ */
+.glass-card {
+  background: color-mix(in srgb, var(--surface-elevated) 80%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+
+/* ═══ Glow effect ═══ */
+.glow-green {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-primary) 15%, transparent),
+    0 4px 24px -4px color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+
+/* ═══ Text gradient ═══ */
+.text-gradient-green {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══ Custom scrollbar ═══ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* ═══ Selection ═══ */
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 25%, transparent);
+  color: var(--foreground);
 }
