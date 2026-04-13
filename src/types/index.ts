@@ -4,7 +4,7 @@
 export interface LeadFormData {
   // Step 1 — 자격 확인
   helpType: 'subsidy-poc' | 'self-ai' | 'quality-auto' | 'production-efficiency'
-  industry: 'automotive' | 'electronics' | 'food' | 'metal' | 'partner' | 'other'
+  industry: 'pharma' | 'packaging' | 'food' | 'cosmetics' | 'electronics' | 'automotive' | 'partner' | 'other'
   // Step 2 — 연락처
   company: string
   name: string
@@ -14,9 +14,12 @@ export interface LeadFormData {
 
 // 지원사업 PDF 리드 마그넷 폼
 export interface SubsidyLeadData {
+  name: string
   email: string
   company: string
   industry: string
+  privacyConsent: boolean
+  newsletterConsent?: boolean
 }
 
 // 일반 문의 폼
@@ -24,6 +27,7 @@ export interface ContactFormData {
   name: string
   email: string
   company: string
+  industry: string
   message: string
 }
 
@@ -80,6 +84,7 @@ export interface SectionCta {
 export interface NavItem {
   label: string
   href: string
+  children?: { label: string; href: string }[]
 }
 
 // 고객 증언

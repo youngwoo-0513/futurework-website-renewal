@@ -4,6 +4,38 @@
 import type { FormSubmitResult, LeadFormData, SubsidyLeadData, ContactFormData } from '@/types'
 import { leadFormSchema, subsidyFormSchema, contactFormSchema } from './schemas'
 
+async function submitToHubSpot(
+  portalId: string,
+  formId: string,
+  fields: { name: string; value: string }[],
+  context?: { consent?: { value: boolean; text: string }[] }
+): Promise<{ ok: boolean; status?: number }> {
+  const body: Record<string, unknown> = { fields }
+  if (context?.consent?.length) {
+    body.legalConsentOptions = {
+      consent: {
+        consentToProcess: true,
+        text: '개인정보 수집 및 이용에 동의합니다.',
+        communications: context.consent.map((c) => ({
+          value: c.value,
+          subscriptionTypeId: 999,
+          text: c.text,
+        })),
+      },
+    }
+  }
+
+  const response = await fetch(
+    `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    }
+  )
+  return { ok: response.ok, status: response.status }
+}
+
 export async function submitLeadForm(data: LeadFormData): Promise<FormSubmitResult> {
   const parsed = leadFormSchema.safeParse(data)
   if (!parsed.success) {
@@ -11,35 +43,25 @@ export async function submitLeadForm(data: LeadFormData): Promise<FormSubmitResu
   }
 
   try {
-    const portalId = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID
-    const formId = process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID
+    const portalId = process.env.HUBSPOT_PORTAL_ID
+    const formId = process.env.HUBSPOT_LEAD_FORM_ID
 
     if (!portalId || !formId) {
-      // HubSpot 미설정 시 로그만 남기고 성공 처리 (개발 환경)
       console.log('[LeadForm] Submission (no HubSpot):', parsed.data)
       return { success: true, message: '제출이 완료되었습니다.' }
     }
 
-    const response = await fetch(
-      `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fields: [
-            { name: 'help_type', value: parsed.data.helpType },
-            { name: 'industry', value: parsed.data.industry },
-            { name: 'company', value: parsed.data.company },
-            { name: 'firstname', value: parsed.data.name },
-            { name: 'email', value: parsed.data.email },
-            { name: 'phone', value: parsed.data.phone },
-          ],
-        }),
-      }
-    )
+    const result = await submitToHubSpot(portalId, formId, [
+      { name: 'firstname', value: parsed.data.name },
+      { name: 'email', value: parsed.data.email },
+      { name: 'mobilephone', value: parsed.data.phone },
+      { name: '0-2/name', value: parsed.data.company },
+      { name: 'company_industry', value: parsed.data.industry },
+      { name: 'yocheongyuhyeong', value: parsed.data.helpType },
+    ])
 
-    if (!response.ok) {
-      console.error('[LeadForm] HubSpot error:', response.status)
+    if (!result.ok) {
+      console.error('[LeadForm] HubSpot error:', result.status)
       return { success: false, message: '잠시 후 다시 시도해주세요.' }
     }
 
@@ -57,30 +79,36 @@ export async function submitSubsidyForm(data: SubsidyLeadData): Promise<FormSubm
   }
 
   try {
-    const portalId = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID
-    const formId = process.env.NEXT_PUBLIC_HUBSPOT_SUBSIDY_FORM_ID
+    const portalId = process.env.HUBSPOT_PORTAL_ID
+    const formId = process.env.HUBSPOT_SUBSIDY_FORM_ID
 
     if (!portalId || !formId) {
       console.log('[SubsidyForm] Submission (no HubSpot):', parsed.data)
       return { success: true, message: '제출이 완료되었습니다.' }
     }
 
-    const response = await fetch(
-      `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`,
+    const result = await submitToHubSpot(
+      portalId,
+      formId,
+      [
+        { name: 'firstname', value: parsed.data.name },
+        { name: 'email', value: parsed.data.email },
+        { name: '0-2/name', value: parsed.data.company },
+        { name: 'company_industry', value: parsed.data.industry },
+        { name: 'gaeinjeongbo_sujibdongui', value: parsed.data.privacyConsent ? '동의' : '' },
+      ],
       {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fields: [
-            { name: 'email', value: parsed.data.email },
-            { name: 'company', value: parsed.data.company },
-            { name: 'industry', value: parsed.data.industry },
-          ],
-        }),
+        consent: [
+          {
+            value: parsed.data.newsletterConsent ?? false,
+            text: '뉴스레터 및 마케팅 정보 수신에 동의합니다.',
+          },
+        ],
       }
     )
 
-    if (!response.ok) {
+    if (!result.ok) {
+      console.error('[SubsidyForm] HubSpot error:', result.status)
       return { success: false, message: '잠시 후 다시 시도해주세요.' }
     }
 
@@ -98,7 +126,27 @@ export async function submitContactForm(data: ContactFormData): Promise<FormSubm
   }
 
   try {
-    console.log('[ContactForm] Submission:', parsed.data)
+    const portalId = process.env.HUBSPOT_PORTAL_ID
+    const formId = process.env.HUBSPOT_CONTACT_FORM_ID
+
+    if (!portalId || !formId) {
+      console.log('[ContactForm] Submission (no HubSpot):', parsed.data)
+      return { success: true, message: '문의가 접수되었습니다. 영업일 기준 1일 내 연락드리겠습니다.' }
+    }
+
+    const result = await submitToHubSpot(portalId, formId, [
+      { name: 'firstname', value: parsed.data.name },
+      { name: 'email', value: parsed.data.email },
+      { name: '0-2/name', value: parsed.data.company },
+      { name: 'company_industry', value: parsed.data.industry },
+      { name: 'message', value: parsed.data.message },
+    ])
+
+    if (!result.ok) {
+      console.error('[ContactForm] HubSpot error:', result.status)
+      return { success: false, message: '잠시 후 다시 시도해주세요.' }
+    }
+
     return { success: true, message: '문의가 접수되었습니다. 영업일 기준 1일 내 연락드리겠습니다.' }
   } catch (error) {
     console.error('[ContactForm] Error:', error)

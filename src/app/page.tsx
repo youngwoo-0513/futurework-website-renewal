@@ -10,6 +10,7 @@ import { SocialProofSection } from '@/components/sections/SocialProofSection'
 import { FaqSection } from '@/components/sections/FaqSection'
 import { FinalCtaSection } from '@/components/sections/FinalCtaSection'
 import { FloatingCTA } from '@/components/ui/FloatingCTA'
+import { ScrollTriggerCTA } from '@/components/ui/ScrollTriggerCTA'
 import { ExitPopup } from '@/components/ui/ExitPopup'
 import { SchemaMarkup } from '@/components/seo/SchemaMarkup'
 
@@ -31,6 +32,7 @@ export default function HomePage() {
       <FinalCtaSection />
 
       <FloatingCTA />
+      <ScrollTriggerCTA />
       <ExitPopup />
     </>
   )

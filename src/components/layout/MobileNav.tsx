@@ -82,6 +82,20 @@ export function MobileNav({ open, onClose }: MobileNavProps) {
                   >
                     {item.label}
                   </Link>
+                  {item.children && (
+                    <div className="ml-4 flex flex-col gap-0.5">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          onClick={onClose}
+                          className="block rounded-lg px-4 py-2 text-sm text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </motion.div>
               ))}
               <div className="my-3 h-px bg-[var(--border)]" />

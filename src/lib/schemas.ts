@@ -5,7 +5,7 @@ export const leadFormStep1Schema = z.object({
   helpType: z.enum(['subsidy-poc', 'self-ai', 'quality-auto', 'production-efficiency'], {
     message: '도움이 필요한 분야를 선택해주세요',
   }),
-  industry: z.enum(['automotive', 'electronics', 'food', 'metal', 'partner', 'other'], {
+  industry: z.enum(['pharma', 'packaging', 'food', 'cosmetics', 'electronics', 'automotive', 'partner', 'other'], {
     message: '업종을 선택해주세요',
   }),
 })
@@ -23,14 +23,20 @@ export const leadFormStep2Schema = z.object({
 export const leadFormSchema = leadFormStep1Schema.merge(leadFormStep2Schema)
 
 export const subsidyFormSchema = z.object({
+  name: z.string().min(1, '이름을 입력해주세요'),
   email: z.string().email('올바른 이메일 주소를 입력해주세요'),
   company: z.string().min(1, '회사명을 입력해주세요'),
   industry: z.string().min(1, '업종을 선택해주세요'),
+  privacyConsent: z.boolean().refine((v) => v === true, {
+    message: '개인정보 수집·이용에 동의해주세요.',
+  }),
+  newsletterConsent: z.boolean().optional(),
 })
 
 export const contactFormSchema = z.object({
   name: z.string().min(1, '이름을 입력해주세요'),
   email: z.string().email('올바른 이메일 주소를 입력해주세요'),
   company: z.string().min(1, '회사명을 입력해주세요'),
+  industry: z.string().min(1, '업종을 선택해주세요'),
   message: z.string().min(10, '문의 내용을 10자 이상 입력해주세요'),
 })

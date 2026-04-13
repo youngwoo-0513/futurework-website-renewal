@@ -60,7 +60,7 @@ export function ProductShowcase() {
               AX Flow 제품구조 및 기능
             </h2>
             <p className="mt-4 text-lg text-[var(--text-secondary)]">
-              Chatting · Library · Agent · Governance — 4대 핵심 기능
+              Chatting · Library · Knowledge Graph · Agent · Governance — 5대 핵심 기능
             </p>
           </div>
         </AnimateIn>

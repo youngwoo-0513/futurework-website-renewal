@@ -16,7 +16,7 @@ export function CoreFeatureSection() {
               같은 사람, 같은 현장. 바뀌는 건 일하는 방식뿐.
             </h2>
             <p className="mt-4 text-lg text-[var(--text-secondary)]">
-              AX Flow 4대 핵심 기능 — Chatting · Library · Agent · Governance
+              AX Flow 5대 핵심 기능 — Chatting · Library · Knowledge Graph · Agent · Governance
             </p>
           </div>
         </AnimateIn>

@@ -64,7 +64,13 @@ export function SubsidyForm({ onSuccess }: SubsidyFormProps) {
         autoComplete="off"
       />
       <Input
-        label="이메일"
+        label="이름"
+        placeholder="예: 홍길동"
+        error={errors.name?.message}
+        {...register('name')}
+      />
+      <Input
+        label="회사 이메일"
         type="email"
         placeholder="hong@company.co.kr"
         error={errors.email?.message}
@@ -83,6 +89,29 @@ export function SubsidyForm({ onSuccess }: SubsidyFormProps) {
         error={errors.industry?.message}
         {...register('industry')}
       />
+      <div className="space-y-2 pt-1">
+        <label className="flex items-start gap-2 text-xs text-[var(--text-secondary)] cursor-pointer">
+          <input
+            type="checkbox"
+            className="mt-0.5 h-4 w-4 rounded border-[var(--border)] accent-primary"
+            {...register('privacyConsent')}
+          />
+          <span>
+            <span className="text-red-500">[필수]</span> 개인정보 수집·이용에 동의합니다.
+          </span>
+        </label>
+        {errors.privacyConsent && (
+          <p className="text-xs text-red-500 pl-6">{errors.privacyConsent.message}</p>
+        )}
+        <label className="flex items-start gap-2 text-xs text-[var(--text-secondary)] cursor-pointer">
+          <input
+            type="checkbox"
+            className="mt-0.5 h-4 w-4 rounded border-[var(--border)] accent-primary"
+            {...register('newsletterConsent')}
+          />
+          <span>[선택] 뉴스레터 및 마케팅 정보 수신에 동의합니다.</span>
+        </label>
+      </div>
       <Button type="submit" size="lg" disabled={isSubmitting} className="w-full">
         {isSubmitting ? '전송 중...' : '무료 가이드 받기'}
       </Button>

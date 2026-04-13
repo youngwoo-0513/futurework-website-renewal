@@ -24,9 +24,17 @@ export const SITE_CONFIG = {
 // ─── 네비게이션 (IA 리뉴얼) ───
 export const NAV_ITEMS: NavItem[] = [
   { label: '제품', href: '/product/ax-flow' },
-  { label: '지원사업(도입비 50%지원)', href: '/solutions/subsidy-guide' },
+  { label: '지원사업', href: '/solutions/subsidy-guide' },
   { label: '데모 신청', href: '/demo' },
-  { label: '리소스', href: '/resources' },
+  {
+    label: '리소스',
+    href: '/resources',
+    children: [
+      { label: '특허', href: '/resources?category=patent' },
+      { label: '고객사례', href: '/resources?category=case-study' },
+      { label: '블로그', href: '/resources?category=blog' },
+    ],
+  },
   { label: '문의', href: '/contact' },
 ]
 
@@ -93,7 +101,7 @@ export const PROBLEM_CTA: SectionCta = {
   variant: 'secondary',
 }
 
-// ─── 핵심 기능 4개 (세일즈덱 Platform Layer 기반, 실무자 관점) ───
+// ─── 핵심 기능 5개 (세일즈덱 Platform Layer 기반, 실무자 관점) ───
 export const CORE_FEATURES = [
   {
     id: 'chatting',
@@ -115,18 +123,35 @@ export const CORE_FEATURES = [
   {
     id: 'library',
     icon: '📚',
-    title: '지식 구조화',
+    title: '데이터 통합·벡터화',
     subtitle: 'Library',
-    headline: '과거 불량 사례, SOP, 배치기록을 5분 안에 찾습니다',
+    headline: 'MES/ERP부터 엑셀·PDF·수기문서·사진·암묵지까지 하나의 지식 저장소로 통합합니다',
     description:
-      '키워드가 아닌 관계 기반 검색. SOP, 배치기록, 수기 문서, 사진까지 Graph-RAG 기반 온톨로지로 연결합니다. 매번 1시간 이상 걸리던 과거 사례 탐색이 5분으로 줄어듭니다.',
-    metric: '90% 단축',
-    metricDetail: '불량 분석 6시간→20분',
+      'MES·ERP·PLM 등 여러 시스템의 정형 데이터와 엑셀·PDF·수기 문서·현장 사진·숙련자 암묵지 같은 비정형 영역까지 한 곳에 통합해 데이터화하고, 이를 Vector DB로 임베딩합니다. 분산되어 사라지던 현장 지식을 검색 가능한 자산으로 만듭니다.',
+    metric: '데이터 자산화',
+    metricDetail: '정형+비정형 통합 Vector DB',
     useCases: [
-      { industry: '제약/GMP', example: 'SOP·배치기록 양식 관리' },
-      { industry: '포장재/부품', example: '과거 불량 사례 관계 탐색' },
-      { industry: '식품/HACCP', example: 'HACCP 문서·추적성 구조화' },
-      { industry: 'MES/ERP 파트너', example: '고객 지식 자산 구조화 → 자사 솔루션 부가가치 생성' },
+      { industry: '제약/GMP', example: 'SOP·배치기록·수기 실험노트 벡터화' },
+      { industry: '포장재/부품', example: '불량 사진·검사 리포트 통합 임베딩' },
+      { industry: '식품/HACCP', example: 'HACCP 문서·현장 기록 구조화' },
+      { industry: 'MES/ERP 파트너', example: '고객 지식 자산화 → 자사 솔루션 부가가치 생성' },
+    ],
+  },
+  {
+    id: 'knowledge-graph',
+    icon: '🕸️',
+    title: '지식그래프',
+    subtitle: 'Knowledge Graph',
+    headline: '흩어진 데이터를 엣지로 연결해 현장 맥락을 복원합니다',
+    description:
+      'Library에 적재된 데이터를 노드·엣지로 연결해 Graph DB로 맥락화합니다. 설비-공정-원자재-불량-작업자-SOP가 관계로 이어지며, 키워드 검색이 놓치던 "왜 이 불량이 났는가"를 관계 기반으로 추적할 수 있습니다.',
+    metric: '90% 단축',
+    metricDetail: '불량 원인 분석 6시간→20분',
+    useCases: [
+      { industry: '제약/GMP', example: '배치-일탈-CAPA 관계 그래프 탐색' },
+      { industry: '포장재/부품', example: '과거 불량 사례 관계 기반 원인 분석' },
+      { industry: '식품/HACCP', example: 'CCP·원료·공정 간 추적성 그래프' },
+      { industry: 'MES/ERP 파트너', example: '고객 데이터 온톨로지화로 상위 분석 레이어 제공' },
     ],
   },
   {
@@ -403,13 +428,13 @@ export const HELP_TYPE_OPTIONS = [
 ] as const
 
 export const INDUSTRY_OPTIONS = [
-  { value: 'pharma', label: '제약/건기식 (GMP)' },
+  { value: 'pharma', label: '제약/건기식' },
   { value: 'packaging', label: '포장재/부품' },
-  { value: 'food', label: '식품 (HACCP)' },
-  { value: 'automotive', label: '자동차' },
-  { value: 'electronics', label: '전자' },
-  { value: 'metal', label: '금속' },
-  { value: 'partner', label: 'MES/ERP/WMS 파트너사' },
+  { value: 'food', label: '식품/건기식' },
+  { value: 'cosmetics', label: '화장품/ODM' },
+  { value: 'electronics', label: '반도체/전자부품' },
+  { value: 'automotive', label: '자동차부품' },
+  { value: 'partner', label: 'MES/ERP/WMS/QMS' },
   { value: 'other', label: '기타' },
 ] as const
 

@@ -1,4 +1,4 @@
-// Header — Refined with animated nav underlines and glass backdrop
+// Header — Refined with animated nav underlines, glass backdrop, and dropdown menus
 'use client'
 
 import { useState } from 'react'
@@ -28,15 +28,42 @@ export function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="relative px-3 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--foreground)] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-primary after:transition-all after:duration-200 hover:after:w-4/5"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {NAV_ITEMS.map((item) =>
+            item.children ? (
+              <div key={item.href} className="group relative">
+                <Link
+                  href={item.href}
+                  className="relative flex items-center gap-1 px-3 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--foreground)] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-primary after:transition-all after:duration-200 hover:after:w-4/5"
+                >
+                  {item.label}
+                  <svg className="h-3.5 w-3.5 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </Link>
+                <div className="invisible absolute left-0 top-full pt-1 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                  <div className="min-w-[140px] rounded-lg border border-[var(--border)] bg-[var(--background)]/95 py-1 shadow-lg backdrop-blur-md">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block px-4 py-2 text-sm text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--foreground)]"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="relative px-3 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--foreground)] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-primary after:transition-all after:duration-200 hover:after:w-4/5"
+              >
+                {item.label}
+              </Link>
+            )
+          )}
         </nav>
 
         {/* Desktop Actions */}

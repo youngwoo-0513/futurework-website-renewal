@@ -11,9 +11,9 @@ import { ProductTestimonials } from '@/components/sections/ProductTestimonials'
 import { Button } from '@/components/ui/Button'
 
 export const metadata: Metadata = {
-  title: 'AX Flow 제품 소개 | Chatting·Library·Agent·Governance',
+  title: 'AX Flow 제품 소개 | Chatting·Library·Knowledge Graph·Agent·Governance',
   description:
-    '대답하는 AI가 아니라, 공장 안의 일을 실제로 끝내는 온톨로지 AI. 4대 핵심 기능과 업종별 활용 사례를 확인하세요.',
+    '대답하는 AI가 아니라, 공장 안의 일을 실제로 끝내는 온톨로지 AI. 5대 핵심 기능과 업종별 활용 사례를 확인하세요.',
 }
 
 export default function ProductPage() {

@@ -25,16 +25,7 @@ export default function ThankYouPage() {
         </p>
 
         <div className="mt-8 space-y-3">
-          {/* Cal.com 캘린더 예약 링크 */}
-          <Button
-            href="https://cal.com"
-            variant="primary"
-            size="lg"
-            className="w-full"
-          >
-            지금 바로 상담 일정 잡기
-          </Button>
-          <Button href="/solutions/subsidy-guide" variant="secondary" size="lg" className="w-full">
+          <Button href="/solutions/subsidy-guide" variant="primary" size="lg" className="w-full">
             스마트공장 지원사업 가이드 보기
           </Button>
           <Button href="/" variant="ghost" size="lg" className="w-full">
