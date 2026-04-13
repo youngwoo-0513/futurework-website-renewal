@@ -140,7 +140,7 @@ export const CORE_FEATURES = [
   {
     id: 'knowledge-graph',
     icon: '🕸️',
-    title: '지식그래프',
+    title: '지식맥락화',
     subtitle: 'Knowledge Graph',
     headline: '흩어진 데이터를 엣지로 연결해 현장 맥락을 복원합니다',
     description:
